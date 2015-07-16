@@ -1,4 +1,4 @@
-<center>
-    <h1>Welcome to "Supermarkets Chain"</h1>
-    <h2>a database application project designed by team "GOLDENROD" at SoftUni</h2>
-</center>
+<h2>Welcome to "Supermarkets Chain"</h2>
+<h4>a database application project designed by team "GOLDENROD" at SoftUni</h4>
+
+<p>Everybody can populate his/her own SQL Database with InitialDatabase.sql</p>
