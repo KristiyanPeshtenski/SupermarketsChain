@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContext", "DBContext\DBContext.csproj", "{B39C87A7-5AA7-4D49-B3E2-2280F977CF0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleDBToSQLServer", "OracleDBToSQLServer\OracleDBToSQLServer.csproj", "{3B6FD355-495F-4732-9B54-0D78A08972E5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZIPArchiveToSQLServer", "ZIPArchiveToSQLServer\ZIPArchiveToSQLServer.csproj", "{4CA67E09-DC75-4840-859A-2077B187D448}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLServerToPDFSalesReport", "SQLServerToPDFSalesReport\SQLServerToPDFSalesReport.csproj", "{8C2DA027-3740-4DEE-953C-32644415BE4F}"
@@ -23,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQLDBToExcelFinancialRepo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLiteDBToExcelFinancialReport", "SQLiteDBToExcelFinancialReport\SQLiteDBToExcelFinancialReport.csproj", "{2B2333DF-71D6-46EF-8ABC-82F256E9E897}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBOracleContext", "DBOracleContext\DBOracleContext.csproj", "{376AD807-0673-43AC-900D-DD3960F3D9A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OracleDBToSQLServer", "OracleDBToSQLServer\OracleDBToSQLServer.csproj", "{3B6FD355-495F-4732-9B54-0D78A08972E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +35,6 @@ Global
 		{B39C87A7-5AA7-4D49-B3E2-2280F977CF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39C87A7-5AA7-4D49-B3E2-2280F977CF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39C87A7-5AA7-4D49-B3E2-2280F977CF0D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CA67E09-DC75-4840-859A-2077B187D448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CA67E09-DC75-4840-859A-2077B187D448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CA67E09-DC75-4840-859A-2077B187D448}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -69,6 +67,14 @@ Global
 		{2B2333DF-71D6-46EF-8ABC-82F256E9E897}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B2333DF-71D6-46EF-8ABC-82F256E9E897}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B2333DF-71D6-46EF-8ABC-82F256E9E897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{376AD807-0673-43AC-900D-DD3960F3D9A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{376AD807-0673-43AC-900D-DD3960F3D9A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{376AD807-0673-43AC-900D-DD3960F3D9A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{376AD807-0673-43AC-900D-DD3960F3D9A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B6FD355-495F-4732-9B54-0D78A08972E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
