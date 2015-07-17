@@ -1,44 +1,5 @@
-﻿USE master
-GO
-
-CREATE DATABASE SupermarketsChain
-GO
-
 USE SupermarketsChain
 GO
-
-CREATE TABLE Vendors (
-	Id INT PRIMARY KEY IDENTITY,
-	Name NVARCHAR(50) NOT NULL
-)
-
-CREATE TABLE Measures (
-	Id INT PRIMARY KEY IDENTITY,
-	Name NVARCHAR(50) NOT NULL
-)
-
-CREATE TABLE Products (
-	Id INT PRIMARY KEY IDENTITY,
-	VendorId INT NOT NULL FOREIGN KEY REFERENCES Vendors(Id),
-	Name NVARCHAR(50) NOT NULL,
-	MeasureId INT NOT NULL FOREIGN KEY REFERENCES Measures(Id),
-	Price MONEY NOT NULL
-)
-
-CREATE TABLE Supermarkets (
-	Id INT PRIMARY KEY IDENTITY,
-	Name NVARCHAR(50) NOT NULL
-)
-
-CREATE TABLE SupermarketsProducts (
-	SupermarketId INT FOREIGN KEY REFERENCES Supermarkets(Id),
-	ProductId INT FOREIGN KEY REFERENCES Products(Id)
-	CONSTRAINT [PK_SupermarketsProducts] PRIMARY KEY CLUSTERED 
-	(
-		SupermarketId ASC,
-		ProductId ASC
-	)
-)
 
 INSERT INTO Vendors (Name) 
 Values 
@@ -88,7 +49,7 @@ Values
 (9, 'Madzharov yellow cheese', 1, 16.00),
 (10, 'Milka kids chockolate', 1, 2.00),
 (11, 'Shushard dark chocolate', 1, 1.00),
-(12, 'Аlmonds', 1, 5.50),
+(12, 'Almonds', 1, 5.50),
 (12, 'Hazelnuts', 1, 4.50),
 (12, 'Cashew', 1, 5.00),
 (13, 'Zagorka beer', 1, 1.00),
