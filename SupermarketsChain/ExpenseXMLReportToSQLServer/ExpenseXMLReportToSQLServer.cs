@@ -1,17 +1,22 @@
 ﻿namespace SupermarketsChain
 {
     using System;
-
+    
     class ExpenseXMLReportToSQLServer
     {
-        static void Main()
+        public static void Main()
         {
-            var dbContext = new SupermarketsChainEntities();
-            var vendors = dbContext.Vendors;
+            var parser = new XmlReportParser();
+            Console.WriteLine("Enter path to XML file.");
+            string path = "path: ..\\..\\..\\..\\Sources\\sampleExpense1.xml";
 
-            foreach (var vendor in vendors)
+            try
             {
-                Console.WriteLine(vendor.Name);
+                parser.ReadXmlFile(path);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
     }

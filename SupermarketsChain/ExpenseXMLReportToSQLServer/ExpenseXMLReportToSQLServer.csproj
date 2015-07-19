@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ExpenseXMLReportToSQLServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlReportParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
