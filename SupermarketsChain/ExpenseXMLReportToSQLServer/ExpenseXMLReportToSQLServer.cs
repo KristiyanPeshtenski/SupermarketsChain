@@ -7,8 +7,8 @@
         public static void Main()
         {
             var parser = new XmlReportParser();
-            Console.WriteLine("Enter path to XML file.");
-            string path = "path: ..\\..\\..\\..\\Sources\\sampleExpense1.xml";
+            //Console.WriteLine("Enter path to XML file.");
+            string path = "..\\..\\..\\..\\Sources\\sampleExpense1.xml";
 
             try
             {

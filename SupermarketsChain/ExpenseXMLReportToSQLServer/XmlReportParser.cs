@@ -7,7 +7,6 @@
 
     public class XmlReportParser
     {
-
         public void ReadXmlFile(string path)
         {
             var context = new SupermarketsChainEntities();
@@ -26,19 +25,20 @@
                 {
                     foreach (var expensesNode in expensesNodes)
                     {
-                        var month = expensesNode.Attribute("month").Value;
+                        var month = DateTime.Parse(expensesNode.Attribute("month").Value);
                         decimal expense = decimal.Parse(expensesNode.Value);
-                        context.VendorExpensesByMonths.Add(new VendorExpensesByMonth()
+                        var expence = new Expens
                         {
-                            VendorId = vendor.Id,
                             Month = month,
-                            Expenses = expense
-                        });
+                            Expense = expense
+                        };
+                        expence.Vendors.Add(vendor);
+                        context.Expenses.Add(expence);
+                        context.SaveChanges();
                     }
                 }
             }
 
-            context.SaveChanges();
             Console.WriteLine("Report successfully imported");
         }
 
