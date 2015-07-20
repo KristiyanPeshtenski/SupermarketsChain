@@ -1,37 +1,31 @@
---- E:/SoftUni/Database_Apps/Teamwork_SupermaketChain/trunk/Sources/sampleVendorExpensesByMonth.xml	Sun Jul 19 13:50:10 2015
-+++ C:/Users/Kuncho/AppData/Local/Temp/sampleVendorExpensesByMonth.xml-revBASE.svn003.tmp.xml	Fri Jul 17 19:51:49 2015
-@@ -1,2 +1,34 @@
-+<?xml version="1.0" encoding="utf-8" ?>
-+<expenses-by-month>
-+  <vendor name="Nestle Sofia Corp.">
-+    <expenses month="Jul-2013">30.00</expenses>
-+    <expenses month="Aug-2013">40.00</expenses>
-+  </vendor>
-+  <vendor name="Pirinsko Bulgaria LTD">
-+    <expenses month="Jul-2013">200.00</expenses>
-+    <expenses month="Aug-2013">180.00</expenses>
-+  </vendor>
-+  <vendor name="Zagorka Corp.">
-+    <expenses month="Jul-2013">120.00</expenses>
-+    <expenses month="Aug-2013">180.00</expenses>
-+  </vendor>
-+  <vendor name="Gradus Bulgaria LTD">
-+    <expenses month="Jul-2013">433.00</expenses>
-+    <expenses month="Aug-2013">111.00</expenses>
-+  </vendor>
-+  <vendor name="Leki Bulgaria LTD">
-+    <expenses month="Jul-2013">545.00</expenses>
-+    <expenses month="Aug-2013">345.00</expenses>
-+  </vendor>
-+  <vendor name="Unipek Bulgaria LTD">
-+    <expenses month="Jul-2013">433.00</expenses>
-+    <expenses month="Aug-2013">111.00</expenses>
-+  </vendor>
-+  <vendor name="Deroni Bulgaria LTD">
-+    <expenses month="Jul-2013">545.00</expenses>
-+    <expenses month="Aug-2013">345.00</expenses>
-+  </vendor>
-+</expenses-by-month>
-+
- --- E:/SoftUni/Database_Apps/Teamwork_SupermaketChain/trunk/Sources/sampleVendorExpensesByMonth.xml	Sun Jul 19 13:50:10 2015
- +++ C:/Users/Kuncho/AppData/Local/Temp/sampleVendorExpensesByMonth.xml-revBASE.svn003.tmp.xml	Fri Jul 17 19:51:49 2015
+<?xml version="1.0" encoding="utf-8" ?>
+<expenses-by-month>
+  <vendor name="Sachi Bulgaria LTD">
+    <expenses month="01-Apr-2015">65.00</expenses>
+    <expenses month="01-May-2015">140.00</expenses>
+  </vendor>
+  <vendor name="Pirinsko Bulgaria LTD">
+    <expenses month="01-Apr-2015">255.00</expenses>
+    <expenses month="01-May-2015">155.00</expenses>
+  </vendor>
+  <vendor name="Zagorka Corp.">
+    <expenses month="01-Apr-2015">120.00</expenses>
+    <expenses month="01-May-2015">180.00</expenses>
+  </vendor>
+  <vendor name="Gradus Bulgaria LTD">
+    <expenses month="01-Apr-2015">765.00</expenses>
+    <expenses month="01-May-2015">1000.00</expenses>
+  </vendor>
+  <vendor name="Leki Bulgaria LTD">
+    <expenses month="01-Apr-2015">545.00</expenses>
+    <expenses month="01-May-2015">850.00</expenses>
+  </vendor>
+  <vendor name="Unipek Bulgaria LTD">
+    <expenses month="01-Apr-2015">433.00</expenses>
+    <expenses month="01-May-2015">920.00</expenses>
+  </vendor>
+  <vendor name="Deroni Bulgaria LTD">
+    <expenses month="01-Apr-2015">545.00</expenses>
+    <expenses month="01-May-2015">345.00</expenses>
+  </vendor>
+</expenses-by-month>
