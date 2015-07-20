@@ -54,35 +54,21 @@ CREATE TABLE Expenses(
 )
 	
 CREATE TABLE VendorExpenses(
-	Id INT PRIMARY KEY IDENTITY NOT NULL,
 	VendorId INT FOREIGN KEY REFERENCES Vendors(Id) NOT NULL,
 	ExpenseId INT FOREIGN KEY REFERENCES Expenses(Id) NOT NULL,
 )
 
-/* Delete data and reset identity
+CREATE PROC EmptySqlDatabase
+AS
 
-DELETE SupermarketsProducts
-DELETE Supermarkets
-DBCC CHECKIDENT ('Supermarkets', RESEED,  0);
+EXEC sp_MSForEachTable 'ALTER TABLE ? NOCHECK CONSTRAINT ALL' 
 
-ALTER TABLE SupermarketsProducts NOCHECK CONSTRAINT ALL
-DELETE Products
-DBCC CHECKIDENT ('Products', RESEED,  0);
-ALTER TABLE SupermarketsProducts CHECK CONSTRAINT ALL
+EXEC sp_MSForEachTable 'DELETE ?' 
 
-DELETE Measures
-DBCC CHECKIDENT ('Measures', RESEED,  0);
+EXEC sp_MSForEachTable 'DBCC CHECKIDENT (''?'', RESEED,  0)'
 
-DELETE Sales
-DBCC CHECKIDENT ('Sales', RESEED,  0);
+EXEC sp_MSForEachTable 'ALTER TABLE ? CHECK CONSTRAINT ALL' 
 
-DELETE Vendors
-DBCC CHECKIDENT ('Vendors', RESEED,  0);
-
-DELETE Expenses
-DBCC CHECKIDENT ('Expenses', RESEED,  0);
-
-DELETE VendorExpenses
-DBCC CHECKIDENT ('VendorExpenses', RESEED,  0);
-
+/*
+EXEC EmptySqlDatabase
 */
