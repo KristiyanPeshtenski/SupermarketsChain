@@ -40,13 +40,24 @@ CREATE TABLE SupermarketsProducts (
 	)
 )
 
-CREATE TABLE VendorExpensesByMonth(
-	Id INT PRIMARY KEY NOT NULL,
-	VendorId INT FOREIGN KEY REFERENCES Vendors(Id) NOT NULL,
-	[Month] NVARCHAR(50) NOT NULL,
-	Expenses money
+CREATE TABLE Sales(
+	Id INT PRIMARY KEY IDENTITY NOT NULL,
+	SupermarketId INT FOREIGN KEY REFERENCES Supermarkets(Id),
+	ProductId INT FOREIGN KEY REFERENCES Products(Id),
+	OrderedOn DATE NOT NULL
 )
-GO
+
+CREATE TABLE Expenses(
+	Id INT PRIMARY KEY IDENTITY NOT NULL,
+	[Month] DATE NOT NULL,
+	Expense MONEY NOT NULL
+)
+	
+CREATE TABLE VendorExpenses(
+	Id INT PRIMARY KEY IDENTITY NOT NULL,
+	VendorId INT FOREIGN KEY REFERENCES Vendors(Id) NOT NULL,
+	ExpenseId INT FOREIGN KEY REFERENCES Expenses(Id) NOT NULL,
+)
 
 /* Delete data and reset identity
 
@@ -62,7 +73,16 @@ ALTER TABLE SupermarketsProducts CHECK CONSTRAINT ALL
 DELETE Measures
 DBCC CHECKIDENT ('Measures', RESEED,  0);
 
+DELETE Sales
+DBCC CHECKIDENT ('Sales', RESEED,  0);
+
 DELETE Vendors
 DBCC CHECKIDENT ('Vendors', RESEED,  0);
+
+DELETE Expenses
+DBCC CHECKIDENT ('Expenses', RESEED,  0);
+
+DELETE VendorExpenses
+DBCC CHECKIDENT ('VendorExpenses', RESEED,  0);
 
 */
