@@ -29,5 +29,7 @@ namespace SupermarketsChain
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Supermarket> Supermarkets { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Expens> Expenses { get; set; }
+        public virtual DbSet<Sale> Sales { get; set; }
     }
 }

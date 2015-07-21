@@ -17,6 +17,7 @@ namespace SupermarketsChain
         public Product()
         {
             this.Supermarkets = new HashSet<Supermarket>();
+            this.Sales = new HashSet<Sale>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,6 @@ namespace SupermarketsChain
         public virtual Measure Measure { get; set; }
         public virtual Vendor Vendor { get; set; }
         public virtual ICollection<Supermarket> Supermarkets { get; set; }
+        public virtual ICollection<Sale> Sales { get; set; }
     }
 }
