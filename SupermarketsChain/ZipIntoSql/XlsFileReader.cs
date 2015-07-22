@@ -57,7 +57,7 @@
                         //saleCell.ProductId = db.Products.FirstOrDefault(x => x.Name == sheet.GetRow(row).GetCell(1)).Id;
                         //db.Sales.Add(saleCell);
                         //db.SaveChanges();
-                        Console.WriteLine(String.Format("Row: {0}, Col: {1}, Data: {2}", row, cell, cellValue));
+                        //Console.WriteLine(String.Format("Row: {0}, Col: {1}, Data: {2}", row, cell, cellValue));
                         if (row == 1 && cell == 1)
                         {
                             vendor.Name = cellValue;
@@ -67,7 +67,7 @@
                                     .Where(s => s.Name == supermarketName)
                                     .Select(s => s.Id)
                                     .FirstOrDefault();
-                            Console.WriteLine("Supermarket Id = " + supermarketTemp);
+                            //Console.WriteLine("Supermarket Id = " + supermarketTemp);
                             saleCell.SupermarketId = supermarketTemp;
                         }
                         if (row > 2 && cellValue != null)
@@ -79,7 +79,7 @@
                                     .Where(p => p.Name == product.Name)
                                     .Select(p => p.Id)
                                     .FirstOrDefault();
-                                Console.WriteLine("Product Id = " + productId);
+                                //Console.WriteLine("Product Id = " + productId);
                                 saleCell.ProductId = productId;
                             }
                             if (cell == 2)
@@ -92,7 +92,7 @@
                                     newCell.SupermarketId = saleCell.SupermarketId;
                                     newCell.OrderedOn = DateTime.Parse(DateOrder);
                                     dbContext.Sales.Add(newCell);
-                                    Console.WriteLine("Quantity: 1");
+                                    //Console.WriteLine("Quantity: 1");
                                 }
 
                                 dbContext.SaveChanges();
@@ -110,9 +110,8 @@
                 product.Name = "";
                 cell = 1;
             }
-
-            Console.WriteLine();
         }
+
 
         public static DateTime SaleDate(string saleDate)
         {

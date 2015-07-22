@@ -1,5 +1,7 @@
 ﻿namespace SupermarketsChain
 {
+    using System;
+
     class ZIPArchiveToSQLServer
     {
         static void Main()
@@ -28,7 +30,7 @@
 
             //context.Sales.Add(novZapis);
             //context.SaveChanges();
-
+            Console.WriteLine("Done.");
         }
     }
 }

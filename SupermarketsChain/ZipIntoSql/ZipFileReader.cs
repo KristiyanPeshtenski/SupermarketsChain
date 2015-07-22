@@ -16,11 +16,10 @@
                     if (file.FileName.Contains(".xls"))
                     {
                         string pathInsideZip = file.FileName;
-                        Console.WriteLine("Title " + pathInsideZip);
+                        //Console.WriteLine("Title " + pathInsideZip);
                         Regex regex = new Regex(@"((?:[0-9]+){0,2}-[a-zA-Z]+-(?:[0-9]+){4})\.xls");
                         var dateOrder = regex.Match(pathInsideZip).Groups[1].Value;
-                        Console.WriteLine(dateOrder);
-                        Console.WriteLine();
+                        //Console.WriteLine(dateOrder);
                         string fullPath = filePath.Replace("Sales-Reports.zip", "Sales") + '\\' + pathInsideZip.Replace('/', '\\');
                         file.Extract("C:../../../../Sources/Sales/", ExtractExistingFileAction.OverwriteSilently);
                         XlsFileReader.DateOrder = dateOrder;
