@@ -1,6 +1,7 @@
 ﻿namespace SupermarketsChain
 {
     using System;
+    using System.Data.Entity.Migrations;
     using System.Linq;
 
     public static class OracleDBToSQLServer
@@ -8,20 +9,20 @@
         private static OracleEntities dbOracleContext = new OracleEntities();
         private static SupermarketsChainEntities dbContext = new SupermarketsChainEntities();
 
-        public static void MoveAllData()
+        public static void ReplicateDataFromOracle()
         {
-            MoveVendors();
-            MoveMeasures();
-            MoveProducts();
-            MoveSupplyedSupermarkets();
+            ReplicateVendors();
+            ReplicateMeasures();
+            ReplicateProducts();
+            ReplicateSupplyedSupermarkets();
         }
 
-        private static void MoveVendors()
+        private static void ReplicateVendors()
         {
             var inputVendors = dbOracleContext.VENDORS;
             var outputVendors = dbContext.Vendors;
 
-            Console.Write("Move vendors: ");
+            Console.Write("Replicate vendors: ");
             foreach (var vendor in inputVendors)
             {
                 var newVendor = new Vendor()
@@ -29,18 +30,19 @@
                     Name = vendor.NAME
                 };
 
-                outputVendors.Add(newVendor);
+                outputVendors.AddOrUpdate(v => v.Name, newVendor);
             }
+
             dbContext.SaveChanges();
             Console.WriteLine("Done!");
         }
 
-        private static void MoveMeasures()
+        private static void ReplicateMeasures()
         {
             var inputMeasures = dbOracleContext.MEASURES;
             var outputMeasures = dbContext.Measures;
 
-            Console.Write("Move measures: ");
+            Console.Write("Replicate measures: ");
             foreach (var measure in inputMeasures)
             {
                 var newMeasure = new Measure()
@@ -48,18 +50,19 @@
                     Name = measure.NAME
                 };
 
-                outputMeasures.Add(newMeasure);
+                outputMeasures.AddOrUpdate(m => m.Name, newMeasure);
             }
+
             dbContext.SaveChanges();
             Console.WriteLine("Done!");
         }
 
-        private static void MoveProducts()
+        private static void ReplicateProducts()
         {
             var inputProducts = dbOracleContext.PRODUCTS;
             var outputProducts = dbContext.Products;
 
-            Console.Write("Move products: ");
+            Console.Write("Replicate products: ");
             foreach (var product in inputProducts)
             {
                 var newProduct = new Product()
@@ -71,18 +74,19 @@
                 };
                 
 
-                outputProducts.Add(newProduct);
+                outputProducts.AddOrUpdate(p => new { p.Name, p.VendorId, p.Price }, newProduct);
             }
+
             dbContext.SaveChanges();
             Console.WriteLine("Done!");
         }
 
-        private static void MoveSupplyedSupermarkets()
+        private static void ReplicateSupplyedSupermarkets()
         {
             var inputSupermarkets = dbOracleContext.SUPERMARKETS;
             var outputSupermarkets = dbContext.Supermarkets;
 
-            Console.Write("Move supermarkets and supply them with products: ");
+            Console.Write("Replicate supermarkets and supply them with products: ");
             foreach (var supermarket in inputSupermarkets)
             {
                 var newSupermarket = new Supermarket()
@@ -95,8 +99,9 @@
                     newSupermarket.Products.Add(dbContext.Products.FirstOrDefault(p => p.Id == product.ID));
                 }
 
-                outputSupermarkets.Add(newSupermarket);
+                outputSupermarkets.AddOrUpdate(s => s.Name, newSupermarket);
             }
+
             dbContext.SaveChanges();
             Console.WriteLine("Done!");
         }

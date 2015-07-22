@@ -12,18 +12,14 @@ namespace SupermarketsChain
     using System;
     using System.Collections.Generic;
     
-    public partial class Supermarket
+    public partial class Sale
     {
-        public Supermarket()
-        {
-            this.Products = new HashSet<Product>();
-            this.Sales = new HashSet<Sale>();
-        }
-    
         public int Id { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> SupermarketId { get; set; }
+        public Nullable<int> ProductId { get; set; }
+        public System.DateTime OrderedOn { get; set; }
     
-        public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<Sale> Sales { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual Supermarket Supermarket { get; set; }
     }
 }

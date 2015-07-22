@@ -1,12 +1,10 @@
 ﻿namespace SupermarketsChain
 {
-    using System;
-
-    class OracleDBToSQLServerTest
+    public class OracleDBToSQLServerTest
     {
         public static void Main()
         {
-            OracleDBToSQLServer.MoveAllData();
+            OracleDBToSQLServer.ReplicateDataFromOracle();
         }
     }
 }

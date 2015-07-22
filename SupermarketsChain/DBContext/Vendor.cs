@@ -17,11 +17,13 @@ namespace SupermarketsChain
         public Vendor()
         {
             this.Products = new HashSet<Product>();
+            this.Expenses = new HashSet<Expens>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Expens> Expenses { get; set; }
     }
 }

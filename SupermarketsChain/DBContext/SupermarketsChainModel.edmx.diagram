@@ -8,10 +8,15 @@
         <EntityTypeShape EntityType="SupermarketsChain.Measure" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SupermarketsChain.Product" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="SupermarketsChain.Supermarket" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SupermarketsChain.Vendor" Width="1.5" PointX="5.375" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SupermarketsChain.Vendor" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="SupermarketsChain.FK__Products__Measur__15502E78" ManuallyRouted="false" />
         <AssociationConnector Association="SupermarketsChain.FK__Products__Vendor__145C0A3F" ManuallyRouted="false" />
         <AssociationConnector Association="SupermarketsChain.SupermarketsProducts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SupermarketsChain.Expens" Width="1.5" PointX="5.375" PointY="6.375" />
+        <EntityTypeShape EntityType="SupermarketsChain.Sale" Width="1.5" PointX="5.625" PointY="2.125" />
+        <AssociationConnector Association="SupermarketsChain.FK__Sales__ProductId__1ED998B2" />
+        <AssociationConnector Association="SupermarketsChain.FK__Sales__Supermark__1DE57479" />
+        <AssociationConnector Association="SupermarketsChain.VendorExpenses" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

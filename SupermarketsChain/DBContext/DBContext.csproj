@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Expens.cs">
+      <DependentUpon>SupermarketsChainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Measure.cs">
       <DependentUpon>SupermarketsChainModel.tt</DependentUpon>
     </Compile>
@@ -60,6 +63,9 @@
       <DependentUpon>SupermarketsChainModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sale.cs">
+      <DependentUpon>SupermarketsChainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Supermarket.cs">
       <DependentUpon>SupermarketsChainModel.tt</DependentUpon>
     </Compile>
