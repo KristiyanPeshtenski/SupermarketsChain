@@ -1,18 +1,21 @@
-﻿namespace SupermarketsChain
+﻿namespace SupermarketsChain.SalesByVendorReport
 {
     using System;
 
-    class SQLServerToXMLSalesByVendorReport
+    public class SqlServerToXMLSalesByVendorReport
     {
         static void Main()
         {
-            var dbContext = new SupermarketsChainEntities();
-            var vendors = dbContext.Vendors;
+            //DateTime startDate = new DateTime(2015, 07, 27);
+            //DateTime endDate = new DateTime(2015, 07, 28);
+            var parser = new XmlReportsExporter();
 
-            foreach (var vendor in vendors)
-            {
-                Console.WriteLine(vendor.Name);
-            }
+            string input = Console.ReadLine();
+            var arguments = input.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            var datesRange = parser.ParseInputParams(arguments);
+
+            parser.GenerateReport(datesRange);
+
         }
     }
 }
