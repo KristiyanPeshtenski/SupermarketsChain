@@ -36,6 +36,25 @@
                 cmd.Parameters.AddWithValue("@supermarket", supermarket.Name);
                 cmd.ExecuteNonQuery();
             }
+
+            //Insert vendors
+            foreach (var vendor in vendors)
+            {
+                String insertQuery = "insert into vendors (id, name) values (null, @vendor)";
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                cmd.Parameters.AddWithValue("@vendor", vendor.Name);
+                cmd.ExecuteNonQuery();
+            }
+
+            //Insert expense
+            foreach (var expense in expenses)
+            {
+                String insertQuery = "insert into expenses (id, month, expense) values (null, @month, @expense)";
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                cmd.Parameters.AddWithValue("@month", expense.Month);
+                cmd.Parameters.AddWithValue("@expense", expense.Expense);
+                cmd.ExecuteNonQuery();
+            }
         }
     }
 }
