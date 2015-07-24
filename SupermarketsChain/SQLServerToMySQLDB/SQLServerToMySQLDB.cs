@@ -46,13 +46,36 @@
                 cmd.ExecuteNonQuery();
             }
 
-            //Insert expense
+            //Insert expenses
             foreach (var expense in expenses)
             {
                 String insertQuery = "insert into expenses (id, month, expense) values (null, @month, @expense)";
                 MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
                 cmd.Parameters.AddWithValue("@month", expense.Month);
                 cmd.Parameters.AddWithValue("@expense", expense.Expense);
+                cmd.ExecuteNonQuery();
+            }
+
+            //Insert products
+            foreach (var product in products)
+            {
+                String insertQuery = "insert into products (id, name, price, measure_id, vendor_id) values (null, @name, @price, @measure_id, @vendor_id)";
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                cmd.Parameters.AddWithValue("@name", product.Name);
+                cmd.Parameters.AddWithValue("@price", product.Price);
+                cmd.Parameters.AddWithValue("@measure_id", product.Measure.Id);
+                cmd.Parameters.AddWithValue("@vendor_id", product.Vendor.Id);
+                cmd.ExecuteNonQuery();
+            }
+
+            //Insert sales
+            foreach (var sale in sales)
+            {
+                String insertQuery = "insert into sales (id, ordered_on, supermarket_id, product_id) values (null, @ordered_on, @supermarket_id, @product_id)";
+                MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                cmd.Parameters.AddWithValue("@ordered_on", sale.OrderedOn);
+                cmd.Parameters.AddWithValue("@supermarket_id", sale.Supermarket.Id);
+                cmd.Parameters.AddWithValue("@product_id", sale.Product.Id);
                 cmd.ExecuteNonQuery();
             }
         }
