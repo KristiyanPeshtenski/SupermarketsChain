@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MySQLDBToExcelFinancialReport")]
+[assembly: AssemblyTitle("SQLiteEntities")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MySQLDBToExcelFinancialReport")]
+[assembly: AssemblyProduct("SQLiteEntities")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ebc10e3f-d485-409e-b22c-f9e87b32acdc")]
+[assembly: Guid("c4ad8fa9-30a4-48da-b73e-50c17dff3b40")]
 
 // Version information for an assembly consists of the following four values:
 //
