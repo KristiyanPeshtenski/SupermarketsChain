@@ -78,6 +78,32 @@
                 cmd.Parameters.AddWithValue("@product_id", sale.Product.Id);
                 cmd.ExecuteNonQuery();
             }
+
+            //Insert SupermarketProducts
+            foreach (var supermarket in supermarkets)
+            {
+                foreach (var product in supermarket.Products)
+                {
+                    String insertQuery = "insert into supermarkets_has_products (supermarket_id, product_id) values (@supermarket_id, @product_id)";
+                    MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                    cmd.Parameters.AddWithValue("@supermarket_id", supermarket.Id);
+                    cmd.Parameters.AddWithValue("@product_id", product.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            //Insert VendorsExpenses
+            foreach (var vendor in vendors)
+            {
+                foreach (var expense in vendor.Expenses)
+                {
+                    String insertQuery = "insert into vendors_has_expenses (vendor_id, expense_id) values (@vendor_id, @expense_id)";
+                    MySqlCommand cmd = new MySqlCommand(insertQuery, conn);
+                    cmd.Parameters.AddWithValue("@vendor_id", vendor.Id);
+                    cmd.Parameters.AddWithValue("@expense_id", expense.Id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
