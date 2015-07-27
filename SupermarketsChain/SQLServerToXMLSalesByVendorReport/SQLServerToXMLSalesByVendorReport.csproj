@@ -48,7 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="XmlReportsExporter.cs" />
+    <Compile Include="IXmlExporter.cs" />
+    <Compile Include="XmlExporter.cs" />
     <Compile Include="SQLServerToXMLSalesByVendorReport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
