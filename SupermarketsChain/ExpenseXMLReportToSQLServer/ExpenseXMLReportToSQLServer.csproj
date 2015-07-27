@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpenseXMLReportToSQLServer.cs" />
+    <Compile Include="IXmlParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlReportParser.cs" />
   </ItemGroup>
