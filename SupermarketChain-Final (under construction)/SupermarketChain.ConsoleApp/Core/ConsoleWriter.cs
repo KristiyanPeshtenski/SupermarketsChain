@@ -1,0 +1,34 @@
+﻿using System;
+using System.Text;
+using SupermarketChain.ConsoleApp.Interfaces;
+
+namespace SupermarketChain.ConsoleApp.Core
+{
+    public class ConsoleWriter : IOutputWriter
+    {
+        private readonly StringBuilder outputBuffer;
+
+        public ConsoleWriter()
+        {
+            this.outputBuffer = new StringBuilder();
+        }
+
+        public bool AutoFlush { get; set; }
+
+        public void Write(string line)
+        {
+            this.outputBuffer.AppendLine(line);
+
+            if (this.AutoFlush)
+            {
+                this.Flush();
+            }
+        }
+
+        public void Flush()
+        {
+            Console.Write(this.outputBuffer);
+            this.outputBuffer.Clear();
+        }
+    }
+}
