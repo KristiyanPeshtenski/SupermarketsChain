@@ -1,12 +1,17 @@
-﻿using System;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Text;
-
-namespace SupermarketChain
+﻿namespace SupermarketChain
 {
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using System.Text;
+
     public class OracleToSqlServer
     {
+        private const string ReplicateVendorsString = "Replicate vendors: ";
+        private const string ReplicateMeasuresString = "Replicate measures: ";
+        private const string ReplicateProductsString = "Replicate products: ";
+        private const string ReplicateSupermarkersString = "Replicate supermarkets and supply them with products: ";
+        private const string Done = "Done!";
+
         private static readonly SupermarketChainOracleEntities DbOracleContext = new SupermarketChainOracleEntities();
         private static readonly SupermarketsChainSqlServerEntities DbContext = new SupermarketsChainSqlServerEntities();
         private static readonly StringBuilder Output = new StringBuilder();
@@ -27,7 +32,7 @@ namespace SupermarketChain
             Output.Clear();
             var inputVendors = DbOracleContext.VENDORS;
             var outputVendors = DbContext.Vendors;
-            Output.Append("Replicate vendors: ");
+            Output.Append(ReplicateVendorsString);
             foreach (var vendor in inputVendors)
             {
                 var newVendor = new Vendors()
@@ -39,7 +44,7 @@ namespace SupermarketChain
             }
 
             DbContext.SaveChanges();
-            Output.AppendLine("Done!");
+            Output.AppendLine(Done);
             return Output.ToString();
         }
 
@@ -49,7 +54,7 @@ namespace SupermarketChain
             var inputMeasures = DbOracleContext.MEASURES;
             var outputMeasures = DbContext.Measures;
 
-            Output.Append("Replicate measures: ");
+            Output.Append(ReplicateMeasuresString);
             foreach (var measure in inputMeasures)
             {
                 var newMeasure = new Measures()
@@ -61,7 +66,7 @@ namespace SupermarketChain
             }
 
             DbContext.SaveChanges();
-            Output.AppendLine("Done!");
+            Output.AppendLine(Done);
             return Output.ToString();
         }
 
@@ -71,7 +76,7 @@ namespace SupermarketChain
             var inputProducts = DbOracleContext.PRODUCTS;
             var outputProducts = DbContext.Products;
 
-            Output.Append("Replicate products: ");
+            Output.Append(ReplicateProductsString);
             foreach (var product in inputProducts)
             {
                 var newProduct = new Products()
@@ -87,7 +92,7 @@ namespace SupermarketChain
             }
 
             DbContext.SaveChanges();
-            Output.AppendLine("Done!");
+            Output.AppendLine(Done);
             return Output.ToString();
         }
 
@@ -97,7 +102,7 @@ namespace SupermarketChain
             var inputSupermarkets = DbOracleContext.SUPERMARKETS;
             var outputSupermarkets = DbContext.Supermarkets;
 
-            Output.Append("Replicate supermarkets and supply them with products: ");
+            Output.Append(ReplicateSupermarkersString);
             foreach (var supermarket in inputSupermarkets)
             {
                 var newSupermarket = new Supermarkets()
@@ -114,7 +119,7 @@ namespace SupermarketChain
             }
 
             DbContext.SaveChanges();
-            Output.Append("Done!");
+            Output.Append(Done);
             return Output.ToString();
         }
     }

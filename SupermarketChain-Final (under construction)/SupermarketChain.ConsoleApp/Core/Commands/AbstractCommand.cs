@@ -1,7 +1,7 @@
-﻿using SupermarketChain.ConsoleApp.Interfaces;
-
-namespace SupermarketChain.ConsoleApp.Core.Commands
+﻿namespace SupermarketChain.ConsoleApp.Core.Commands
 {
+    using SupermarketChain.ConsoleApp.Interfaces;
+
     public abstract class AbstractCommand : ICommand
     {
         protected AbstractCommand(IEngine engine)

@@ -1,8 +1,7 @@
-﻿using System;
-using SupermarketChain.ConsoleApp.Interfaces;
-
-namespace SupermarketChain.ConsoleApp.Core.Commands
+﻿namespace SupermarketChain.ConsoleApp.Core.Commands
 {
+    using SupermarketChain.ConsoleApp.Interfaces;
+
     public class ImportFromOracleCommand : AbstractCommand
     {
         public ImportFromOracleCommand(IEngine engine) : base(engine)

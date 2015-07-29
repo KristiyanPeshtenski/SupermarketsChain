@@ -5,6 +5,9 @@
 
     public class SqlServerToMySql
     {
+        private const string MySqlDataSource = "server=localhost;Database=supermarkets_chain;uid=root;pwd=;";
+        private const string ExportToMySQLSuccess = "Export data to MySql server: Done!";
+
         public string ExportDataIntoMySql()
         {
             var context = new SupermarketsChainSqlServerEntities();
@@ -15,8 +18,7 @@
             var products = context.Products;
             var sales = context.Sales;
 
-            const string mySqlDataSource = "server=localhost;Database=supermarkets_chain;uid=root;pwd=;";
-            var connection = new MySqlConnection(mySqlDataSource);
+            var connection = new MySqlConnection(MySqlDataSource);
             connection.Open();
             using (connection)
             {
@@ -37,7 +39,7 @@
                 InsertVendorsExpensesIntoDb(vendors, connection);
             }
 
-            return "Data exporting into MySql: Done!";
+            return ExportToMySQLSuccess;
         }
 
         private static void InsertVendorsExpensesIntoDb(DbSet<Vendors> vendors, MySqlConnection connection)

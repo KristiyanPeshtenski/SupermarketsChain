@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-
-namespace SupermarketChain.ConsoleApp.Core
+﻿namespace SupermarketChain.ConsoleApp.Core
 {
-    using Interfaces;
     using System;
+
+    using Interfaces;
 
     public sealed class Engine : IEngine
     {
-        private bool isStarted;
         private readonly ICommandManager commandManager;
         private readonly IInputReader reader;
         private readonly IOutputWriter writer;
+
+        private bool isStarted;
 
         public Engine(IInputReader reader, IOutputWriter writer, ICommandManager commandManager)
         {

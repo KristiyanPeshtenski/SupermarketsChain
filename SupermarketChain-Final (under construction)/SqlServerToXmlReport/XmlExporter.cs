@@ -7,15 +7,17 @@
 
     public class XmlExporter : IXmlExport
     {
+        private const string ExportFileName = "SalesByVendor.xml";
+        private const string DefaultDateFormat = "dd-MM-yyyy";
+        private const string ExportXmlSuccess = "Export XML Sales by Vendor Reports: Done!";
+
         private readonly string defaultFileLocation = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        private const string defaultFileName = "SalesByVendor.xml";
-        private const string defaultDateFormat = "dd-MM-yyyy";
 
         public XmlExporter()
         {
             this.Db = new SupermarketsChainSqlServerEntities();
-            this.DefautFileLocation = defaultFileLocation;
-            this.DefaultFileName = defaultFileName;
+            this.DefautFileLocation = this.defaultFileLocation;
+            this.DefaultFileName = ExportFileName;
         }
 
         public SupermarketsChainSqlServerEntities Db { get; set; }
@@ -26,7 +28,7 @@
 
         public string GenerateReport(DateTime startDate, DateTime endDate)
         {
-            string path = GenerateFileNameAndPath();
+            string path = this.GenerateFileNameAndPath();
 
             var salesByVendor = new XElement("Sales",
                 this.Db.Sales.Where(s => s.OrderedOn >= startDate && s.OrderedOn <= endDate)
@@ -35,21 +37,20 @@
                         new XAttribute("Vendor", gr.Key.Vendors.Name),
                         new XElement("Summary",
                             new XAttribute("Date",
-                                gr.Key.OrderedOn.ToString(defaultDateFormat, CultureInfo.InvariantCulture)),
-                            new XAttribute("TotalSales", gr.Sum(e => e.Products.Price).ToString("F")
-                                )))));
+                                gr.Key.OrderedOn.ToString(DefaultDateFormat, CultureInfo.InvariantCulture)),
+                                  new XAttribute("TotalSales", gr.Sum(e => e.Products.Price).ToString("F"))))));
 
             salesByVendor.Save(path);
-            return "Generating XML Sales by Vendor Reports: Done!";
+            return ExportXmlSuccess;
         }
 
         public string GenerateFileNameAndPath()
         {
-            return DefautFileLocation +
+            return this.DefautFileLocation +
                 "\\" +
                 DateTime.Now.ToString("dd-MM-yyyy") +
                 " " +
-                DefaultFileName;
+                this.DefaultFileName;
         }
     }
 }

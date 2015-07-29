@@ -6,18 +6,74 @@
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+
     using MySql.Data.MySqlClient;
-    using SQL = System.Data;
+
     using Excel = Microsoft.Office.Interop.Excel;
+    using SQL = System.Data;
 
     public class SqliteMysqlToExcel
     {
+        private const string SQLiteDataSource = @"E:\Programming\Database Apps\TaxInformation.sqlite";
+        private const string ExportToExcelSuccess = "Export excel financial result by vendor: Done!";
+        private readonly string exportFileName = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Report.xlsx";
+
+        public string ExportDataSetToExcel()
+        {
+            SQL.DataSet ds;
+
+            try
+            {
+                ds = this.PrepareDataForExcelExport();
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+
+            var excelApp = new Excel.Application();
+            var excelPath = this.exportFileName;
+
+            if (System.IO.File.Exists(excelPath))
+            {
+                System.IO.File.Delete(excelPath);
+            }
+
+            var excelWorkBook = excelApp.Workbooks.Add(Missing.Value);
+
+            foreach (SQL.DataTable table in ds.Tables)
+            {
+                Excel.Worksheet excelWorkSheet = excelWorkBook.Sheets.Add();
+                excelWorkSheet.Name = table.TableName;
+
+                for (int i = 1; i < table.Columns.Count + 1; i++)
+                {
+                    excelWorkSheet.Cells[1, i] = table.Columns[i - 1].ColumnName;
+                }
+
+                for (int j = 0; j < table.Rows.Count; j++)
+                {
+                    for (int k = 0; k < table.Columns.Count; k++)
+                    {
+                        excelWorkSheet.Cells[j + 2, k + 1] = table.Rows[j].ItemArray[k].ToString();
+                    }
+                }
+            }
+
+            excelWorkBook.SaveAs(excelPath);
+
+            excelWorkBook.Save();
+            excelWorkBook.Close();
+            excelApp.Quit();
+
+            return ExportToExcelSuccess;
+        }
+
         private SQL.DataSet PrepareDataForExcelExport()
         {
-            const string sqlSelect = "SELECT * FROM ProductTaxes";
-            const string dataSource = @"E:\Programming\Database Apps\TaxInformation.sqlite";
-            var sqLiteConnection = new SQLiteConnection("Data Source=" + dataSource);
-            var selectCommand = new SQLiteCommand(sqlSelect, sqLiteConnection);
+            const string SqlSelect = "SELECT * FROM ProductTaxes";
+            var sqLiteConnection = new SQLiteConnection("Data Source=" + SQLiteDataSource);
+            var selectCommand = new SQLiteCommand(SqlSelect, sqLiteConnection);
             var sales = new List<SaleForExcelReport>();
             SQLiteDataReader sqLiteDataReader = null;
 
@@ -55,20 +111,27 @@
 
                 while (sqLiteDataReader.Read() && mySqlDataReader.Read())
                 {
-                    AddDataIntoSalesList(sqLiteDataReader, mySqlDataReader, sales);
+                    this.AddDataIntoSalesList(sqLiteDataReader, mySqlDataReader, sales);
                 }
 
-                AddSalesIntoDataTable(sales, productsTaxes);
+                this.AddSalesIntoDataTable(sales, productsTaxes);
             }
             catch (Exception e)
             {
                 throw e;
             }
-
             finally
             {
-                if (sqLiteDataReader != null) sqLiteDataReader.Close();
-                if (mySqlDataReader != null) mySqlDataReader.Close();
+                if (sqLiteDataReader != null)
+                {
+                    sqLiteDataReader.Close();
+                }
+
+                if (mySqlDataReader != null)
+                {
+                    mySqlDataReader.Close();
+                }
+
                 sqLiteConnection.Close();
             }
 
@@ -97,70 +160,20 @@
                 gs.Income,
                 gs.Expense,
                 gs.Tax,
-                gs.FinancialResult
-                ));
+                gs.FinancialResult));
         }
 
         private void AddDataIntoSalesList(SQLiteDataReader sqLiteDataReader, MySqlDataReader mySqlDataReader, List<SaleForExcelReport> sales)
         {
             var productTax = Convert.ToDecimal(sqLiteDataReader["Tax"].ToString());
             var income = mySqlDataReader.GetDecimal(2);
-            var taxPercentage = productTax/100;
-            var currentTax = income*taxPercentage;
+            var taxPercentage = productTax / 100;
+            var currentTax = income * taxPercentage;
             var sale = new SaleForExcelReport(mySqlDataReader.GetString(0),
                 income,
                 mySqlDataReader.GetDecimal(3),
                 currentTax);
             sales.Add(sale);
-        }
-
-        public string ExportDataSetToExcel()
-        {
-            SQL.DataSet ds;
-
-            try
-            {
-                ds = PrepareDataForExcelExport();
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
-
-            var excelApp = new Excel.Application();
-
-            if (System.IO.File.Exists(@"C:\Users\Rosen\Desktop\Report.xlsx"))
-            {
-                System.IO.File.Delete(@"C:\Users\Rosen\Desktop\Report.xlsx");
-            }
-            var excelWorkBook = excelApp.Workbooks.Add(Missing.Value);
-
-            foreach (SQL.DataTable table in ds.Tables)
-            {
-                Excel.Worksheet excelWorkSheet = excelWorkBook.Sheets.Add();
-                excelWorkSheet.Name = table.TableName;
-
-                for (int i = 1; i < table.Columns.Count + 1; i++)
-                {
-                    excelWorkSheet.Cells[1, i] = table.Columns[i - 1].ColumnName;
-                }
-
-                for (int j = 0; j < table.Rows.Count; j++)
-                {
-                    for (int k = 0; k < table.Columns.Count; k++)
-                    {
-                        excelWorkSheet.Cells[j + 2, k + 1] = table.Rows[j].ItemArray[k].ToString();
-                    }
-                }
-            }
-
-            excelWorkBook.SaveAs(@"C:\Users\Rosen\Desktop\Report.xlsx");
-
-            excelWorkBook.Save();
-            excelWorkBook.Close();
-            excelApp.Quit();
-
-            return "Exporting financial result by vendor in Excel: Done!";
         }
     }
 }

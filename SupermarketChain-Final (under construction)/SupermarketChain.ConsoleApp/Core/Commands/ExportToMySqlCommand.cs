@@ -1,7 +1,7 @@
-﻿using SupermarketChain.ConsoleApp.Interfaces;
-
-namespace SupermarketChain.ConsoleApp.Core.Commands
+﻿namespace SupermarketChain.ConsoleApp.Core.Commands
 {
+    using SupermarketChain.ConsoleApp.Interfaces;
+
     public class ExportToMySqlCommand : AbstractCommand
     {
         public ExportToMySqlCommand(IEngine engine) : base(engine)

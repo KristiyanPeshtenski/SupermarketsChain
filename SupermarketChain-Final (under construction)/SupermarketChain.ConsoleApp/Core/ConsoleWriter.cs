@@ -1,9 +1,10 @@
-﻿using System;
-using System.Text;
-using SupermarketChain.ConsoleApp.Interfaces;
-
-namespace SupermarketChain.ConsoleApp.Core
+﻿namespace SupermarketChain.ConsoleApp.Core
 {
+    using System;
+    using System.Text;
+
+    using SupermarketChain.ConsoleApp.Interfaces;
+
     public class ConsoleWriter : IOutputWriter
     {
         private readonly StringBuilder outputBuffer;

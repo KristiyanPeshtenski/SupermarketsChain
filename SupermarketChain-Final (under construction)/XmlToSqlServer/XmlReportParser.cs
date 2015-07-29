@@ -1,15 +1,17 @@
-﻿using System.Text;
-
-namespace SupermarketChain
+﻿namespace SupermarketChain
 {
     using System;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Xml.Linq;
     using System.Xml.XPath;
 
     public class XmlReportParser : IXmlParser
     {
+        private const string FileMissing = "File does not exists";
+        private const string ImportSuccess = "Importing XML Report: Done!";
+
         public XmlReportParser()
         {
             this.Db = new SupermarketsChainSqlServerEntities();
@@ -52,11 +54,11 @@ namespace SupermarketChain
                     }
                 }
 
-                output.Append("Report successfully imported");
+                output.Append(ImportSuccess);
             }
             else
             {
-                throw new ArgumentException("File does not exists");
+                throw new ArgumentException(FileMissing);
             }
 
             return output.ToString();

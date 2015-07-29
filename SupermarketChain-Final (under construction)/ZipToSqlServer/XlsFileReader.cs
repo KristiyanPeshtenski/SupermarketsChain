@@ -24,7 +24,7 @@
 
             ISheet sheet = xlsFile.GetSheet("Sales");
 
-            CollectData(sheet);
+            this.CollectData(sheet);
         }
 
         public void CollectData(ISheet sheet)
@@ -37,7 +37,6 @@
             var supermarket = new Supermarkets();
 
             int quantity;
-            int measureType = 1;
             string cellValue;
 
             int cell = 1;
@@ -47,7 +46,7 @@
                 if (sheet.GetRow(row) != null)
                 {
 
-                    while (sheet.GetRow(row).GetCell(cell) != null && sheet.GetRow(row).GetCell(cell).ToString() != "")
+                    while (sheet.GetRow(row).GetCell(cell) != null && sheet.GetRow(row).GetCell(cell).ToString() != string.Empty)
                     {
                         cellValue = sheet.GetRow(row).GetCell(cell).ToString();
 
@@ -78,10 +77,12 @@
                                 quantity = int.Parse(cellValue);
                                 for (int quantityLines = 0; quantityLines < quantity; quantityLines++)
                                 {
-                                    var newCell = new Sales();
-                                    newCell.ProductId = saleCell.ProductId;
-                                    newCell.SupermarketId = saleCell.SupermarketId;
-                                    newCell.OrderedOn = DateTime.Parse(DateOrder);
+                                    var newCell = new Sales
+                                                      {
+                                                          ProductId = saleCell.ProductId,
+                                                          SupermarketId = saleCell.SupermarketId,
+                                                          OrderedOn = DateTime.Parse(this.DateOrder)
+                                                      };
                                     dbContext.Sales.Add(newCell);
                                 }
 
@@ -97,7 +98,7 @@
                     }
                 }
 
-                product.Name = "";
+                product.Name = string.Empty;
                 cell = 1;
             }
         }

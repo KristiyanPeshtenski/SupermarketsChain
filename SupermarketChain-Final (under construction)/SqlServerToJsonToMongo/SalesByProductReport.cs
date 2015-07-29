@@ -1,10 +1,9 @@
-﻿using System.Text;
-
-namespace SupermarketChain
+﻿namespace SupermarketChain
 {
     using System;
     using System.IO;
     using System.Linq;
+    using System.Text;
     using System.Web.Script.Serialization;
 
     using MongoDB.Bson;
@@ -12,7 +11,16 @@ namespace SupermarketChain
 
     public class SalesByProductReport
     {
-        private static readonly JavaScriptSerializer Js = new JavaScriptSerializer(); 
+        private const string MongoDbAddress = "mongodb://localhost";
+        private const string MongoDbDatabase = "local";
+        private const string MongoDbCollection = "SalesByProductReports";
+        private const string ExportFileExtension = ".json";
+        private const string ExportToFolderSuccess = "Export JSON Product Report to folder: Done!";
+        private const string ExportToMongoDbSuccess = "Export JSON Product Report to Mongo DB: Done!";
+       
+        private static readonly JavaScriptSerializer Js = new JavaScriptSerializer();
+
+        private readonly string exportFolderName = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + @"\Json-Report\";
 
         public int ProductId { get; set; }
 
@@ -24,69 +32,11 @@ namespace SupermarketChain
 
         public decimal TotalIncomes { get; set; }
 
-        private string ExportToFolder(DateTime startDate, DateTime endDate)
-        {
-            var products = GetProductDataForReport(startDate, endDate);
-
-            string directoryPath = "..\\..\\Json-Reports\\";
-            
-            if (!Directory.Exists(directoryPath))
-            {
-                Directory.CreateDirectory(directoryPath);
-            }
-
-            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
-            foreach (var file in directoryInfo.GetFiles())
-            {
-                file.Delete();
-            }
-
-            foreach (var product in products)
-            {
-                var json = GenerateJsonObjectForProduct(product, Js);
-
-                string filePath = directoryPath + product.ProductId + ".json";
-                File.AppendAllText(filePath, json);
-            }
-
-            return "Exporting JSON Product Report to folder: Done!";
-        }
-
-        private string ExportToServer(DateTime startDate, DateTime endDate)
-        {
-            var products = GetProductDataForReport(startDate, endDate);
-
-            var connectionString = "mongodb://localhost";
-            var client = new MongoClient(connectionString);
-            var server = client.GetServer();
-            server.Connect();
-            var database = server.GetDatabase("local");
-
-            string collectionName = "SalesByProductReports";
-            if (!database.CollectionExists(collectionName))
-            {
-                database.CreateCollection(collectionName);
-            }
-
-            var collection = database.GetCollection<BsonDocument>(collectionName);
-            collection.RemoveAll();
-
-            foreach (var product in products)
-            {
-                var json = GenerateJsonObjectForProduct(product, Js);
-
-                BsonDocument bson = MongoDB.Bson.Serialization.BsonSerializer.Deserialize<BsonDocument>(json);
-                collection.Insert(bson);
-            }
-
-            return "Exporting JSON Product Report to Mongo DB: Done!";
-        }
-
         public string ExportJson(DateTime startDate, DateTime endDate)
         {
             var output = new StringBuilder();
             output.AppendLine(this.ExportToFolder(startDate, endDate));
-            output.AppendLine(this.ExportToServer(startDate, endDate));
+            output.Append(this.ExportToServer(startDate, endDate));
             return output.ToString();
         }
 
@@ -118,9 +68,67 @@ namespace SupermarketChain
                         ProductName = p.Name,
                         VendorName = p.Vendors.Name,
                         TotalQuantitySold = p.Sales.Count(s => s.ProductId == p.Id),
-                        TotalIncomes = p.Price*p.Sales.Count(s => s.ProductId == p.Id)
+                        TotalIncomes = p.Price * p.Sales.Count(s => s.ProductId == p.Id)
                     });
             return products;
+        }
+
+        private string ExportToFolder(DateTime startDate, DateTime endDate)
+        {
+            var products = GetProductDataForReport(startDate, endDate);
+
+            string directoryPath = this.exportFolderName;
+
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            DirectoryInfo directoryInfo = new DirectoryInfo(directoryPath);
+            foreach (var file in directoryInfo.GetFiles())
+            {
+                file.Delete();
+            }
+
+            foreach (var product in products)
+            {
+                var json = GenerateJsonObjectForProduct(product, Js);
+
+                string filePath = directoryPath + product.ProductId + ExportFileExtension;
+                File.AppendAllText(filePath, json);
+            }
+
+            return ExportToFolderSuccess;
+        }
+
+        private string ExportToServer(DateTime startDate, DateTime endDate)
+        {
+            var products = GetProductDataForReport(startDate, endDate);
+
+            var connectionString = MongoDbAddress;
+            var client = new MongoClient(connectionString);
+            var server = client.GetServer();
+            server.Connect();
+            var database = server.GetDatabase(MongoDbDatabase);
+
+            string collectionName = MongoDbCollection;
+            if (!database.CollectionExists(collectionName))
+            {
+                database.CreateCollection(collectionName);
+            }
+
+            var collection = database.GetCollection<BsonDocument>(collectionName);
+            collection.RemoveAll();
+
+            foreach (var product in products)
+            {
+                var json = GenerateJsonObjectForProduct(product, Js);
+
+                BsonDocument bson = MongoDB.Bson.Serialization.BsonSerializer.Deserialize<BsonDocument>(json);
+                collection.Insert(bson);
+            }
+
+            return ExportToMongoDbSuccess;
         }
     }
 }

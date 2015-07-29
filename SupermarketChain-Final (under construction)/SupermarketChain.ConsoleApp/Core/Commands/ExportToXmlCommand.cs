@@ -1,8 +1,8 @@
-﻿using System;
-using SupermarketChain.ConsoleApp.Interfaces;
-
-namespace SupermarketChain.ConsoleApp.Core.Commands
+﻿namespace SupermarketChain.ConsoleApp.Core.Commands
 {
+    using System;
+    using SupermarketChain.ConsoleApp.Interfaces;
+
     public class ExportToXmlCommand : AbstractCommand
     {
         public ExportToXmlCommand(IEngine engine) : base(engine)

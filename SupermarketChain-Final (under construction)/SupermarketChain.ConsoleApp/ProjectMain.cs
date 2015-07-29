@@ -1,8 +1,8 @@
-﻿using SupermarketChain.ConsoleApp.Core;
-using SupermarketChain.ConsoleApp.Interfaces;
-
-namespace SupermarketChain.ConsoleApp
+﻿namespace SupermarketChain.ConsoleApp
 {
+    using SupermarketChain.ConsoleApp.Core;
+    using SupermarketChain.ConsoleApp.Interfaces;
+
     public class ProjectMain
     {
         public static void Main()
@@ -15,7 +15,7 @@ namespace SupermarketChain.ConsoleApp
 
             ICommandManager commandManager = new CommandManager();
 
-            var engine = new Engine(consoleReader,consoleWriter,commandManager);
+            var engine = new Engine(consoleReader, consoleWriter, commandManager);
 
             engine.Start();
         }
