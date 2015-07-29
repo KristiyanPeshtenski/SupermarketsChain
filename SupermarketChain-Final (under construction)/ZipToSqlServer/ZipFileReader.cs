@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.IO;
+using System.Text;
 
 namespace SupermarketChain
 {
@@ -24,6 +25,7 @@ namespace SupermarketChain
                         file.Extract(@"C:\Users\Rosen\Documents\GitHub\SupermarketsChain.git\trunk\Sources\Sales", ExtractExistingFileAction.OverwriteSilently);
                         var xlsFileReader = new XlsFileReader {DateOrder = dateOrder};
                         xlsFileReader.ReadXls(fullPath);
+                        Directory.Delete(@"C:\Users\Rosen\Documents\GitHub\SupermarketsChain.git\trunk\Sources\Sales", true);
                     }
                 }
             }

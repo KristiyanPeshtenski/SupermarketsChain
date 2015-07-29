@@ -1,5 +1,4 @@
-﻿using System;
-using SupermarketChain.ConsoleApp.Interfaces;
+﻿using SupermarketChain.ConsoleApp.Interfaces;
 
 namespace SupermarketChain.ConsoleApp.Core.Commands
 {
@@ -11,7 +10,8 @@ namespace SupermarketChain.ConsoleApp.Core.Commands
 
         public override void Execute(string[] commandArgs)
         {
-            throw new NotImplementedException();
+            var mysqlExporter = new SqlServerToMySql();
+            this.Engine.OutputWriter.Write(mysqlExporter.ExportDataIntoMySql());
         }
     }
 }

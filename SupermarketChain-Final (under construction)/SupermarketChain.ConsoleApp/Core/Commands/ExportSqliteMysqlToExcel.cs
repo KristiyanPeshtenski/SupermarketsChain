@@ -15,7 +15,8 @@ namespace SupermarketChain.ConsoleApp.Core.Commands
 
         public override void Execute(string[] commandArgs)
         {
-            throw new NotImplementedException();
+            var excelExporter = new SqliteMysqlToExcel();
+            this.Engine.OutputWriter.Write(excelExporter.ExportDataSetToExcel());
         }
     }
 }

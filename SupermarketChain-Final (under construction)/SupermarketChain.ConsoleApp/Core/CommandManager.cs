@@ -31,6 +31,11 @@ namespace SupermarketChain.ConsoleApp.Core
 
         public void SeedCommands()
         {
+            this.commandsByName["export-to-excel"] = new ExportSqliteMysqlToExcel(this.Engine);
+            this.commandsByName["export-to-mysql"] = new ExportToMySqlCommand(this.Engine);
+            this.commandsByName["export-json"] = new ExportJsonReportsToMongoCommand(this.Engine);
+            this.commandsByName["export-to-xml"] = new ExportToXmlCommand(this.Engine);
+            this.commandsByName["export-to-pdf"] = new ExportToPdfCommand(this.Engine);
             this.commandsByName["import-from-oracle"] = new ImportFromOracleCommand(this.Engine);
             this.commandsByName["import-from-zip"] = new ImportFromZipCommand(this.Engine);
             this.commandsByName["import-from-xml"] = new ImportFromXmlCommand(this.Engine);
