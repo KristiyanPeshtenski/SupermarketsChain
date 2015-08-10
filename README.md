@@ -4,4 +4,4 @@
 <p>Everybody can populate his/her own SQL Database with MSSQLSchemaOnly.sql after that MSSQLMockingData.sql</p>
 <p>Everybody can find his/her projects at the solution and can test dbContext</p>
 Version 2
-<p>If you cannot connect to SQL Database you should change your App.config between "connectionStrings" tag where "data source=." change "." to your server name.</p>
+<p>If ylou caffnnot connect to SQL Database you should change your App.config between "connectionStrings" tag where "data source=." change "." to your server name.</p>
